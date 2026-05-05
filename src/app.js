@@ -7,6 +7,7 @@ import mongoose from 'mongoose';
 import { requestLogger } from './shared/middleware/requestLogger.js';
 import { errorHandler } from './shared/middleware/errorHandler.js';
 import { env } from './config/env.js';
+import authRoutes from './modules/auth/auth.routes.js';
 
 export const createApp = () => {
   const app = express();
@@ -30,6 +31,9 @@ export const createApp = () => {
   });
 
   // Routes go here (added per phase)
+
+  // inside createApp(), after middleware, before errorHandler:
+  app.use('/api/v1/auth', authRoutes);
 
   // Must be last
   app.use(errorHandler);

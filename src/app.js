@@ -8,6 +8,7 @@ import { requestLogger } from './shared/middleware/requestLogger.js';
 import { errorHandler } from './shared/middleware/errorHandler.js';
 import { env } from './config/env.js';
 import authRoutes from './modules/auth/auth.routes.js';
+import walletRoutes from './modules/wallet/wallet.routes.js';
 
 export const createApp = () => {
   const app = express();
@@ -34,6 +35,7 @@ export const createApp = () => {
 
   // inside createApp(), after middleware, before errorHandler:
   app.use('/api/v1/auth', authRoutes);
+  app.use('/api/v1/wallets', walletRoutes);
 
   // Must be last
   app.use(errorHandler);
